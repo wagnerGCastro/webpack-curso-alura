@@ -92,3 +92,88 @@
 		-- "start": "webpack-dev-server"
 		npm start
 
+
+#04 - Tratando arquivos CSS como módulos 
+=======================================================================================
+	-- Utilizando o npm para gerenciar dependências front-end
+
+
+ -- Pergunta
+	Podemos usar o npm da própria plataforma Node.js para gerenciar as dependências de frontend da nossa aplicação. 
+	Nesse sentido, Webpack será o responsável pelo carregamento dessas dependências adicionando-as no bundle da aplicação.
+
+		Exato. Quem gerencia as dependências é o npm, o Webpack apenas permitirá adicioná-las ao bundle da aplicação 
+		tratando-os como módulos, contato que haja um loader configurado para lidar com o tipo de arquivo em questão.
+
+ -- loaders para trabalhar com css do boostrap
+
+ 	client$ npm install css-loader@0.28.4 style-loader@0.18.2 --save-dev
+
+ 	  -- css-loader faz o seguinte: vai ler todo css e vai transformar em json um objeto javascript
+ 	  -- style-loader vai pegar essa informacao desse objto josn vai transformar em line para p navegador
+
+		{ 
+			test: /\.css$/, 
+			loader: 'style-loader!css-loader' 
+		}
+
+-- loader para trabalhar fonts do bootstrap
+
+	Neste capítulo vimos:
+
+	    Como utilizar o npm para gerenciar nossas dependências frontend
+	    Como o Webpack lida com as dependências em node_modules adicionado-as no bundle da aplicação.
+	    O papel de loaders
+	    Que o padrão é adicionar no bundle scripts e CSS's
+	    Que podemos separar CSS's do bundle criado e importá-los através da tag link através do módulo extract-text-webpack-plugin.
+	    A utilizar o plugin optimize-css-assets-webpack-plugin para minificar CSS's importados se adicionados no style.css. 
+
+
+
+
+	Nós utilizaremos dois loaders documentados no Webpack: url-loader e file-loader. 
+	
+	Esse dois loaders trabalharão em conjunto porque o url-loader vai ver a url e extrair a fonte, em seguida, 
+	irá copiá-la para o local apropriado. Porém, algumas fontes receberão um tratamento especial, por isso, a 
+	necessidade do file-loader. Nós criaremos no webpack.config.js várias regras para lidar com diferentes tipos 
+	de fontes utilizadas. Esse tipo de configuração é facilmente encontrada por quem trabalha com o Webpack e bootstrap, 
+	você irá encontrá-la logo abaixo:
+	
+	client$ npm install url-loader@0.5.9 file-loader@0.11.2 --save-dev
+
+	---
+	webpack.config.js
+
+	{ 
+        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, 
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff' 
+    },
+    { 
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, 
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
+    },
+    { 
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, 
+        loader: 'file-loader' 
+    },
+    { 
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, 
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml' 
+    } 
+
+    Entre as fontes trabalhadas estão: woff, ttf, eot e svg. Algumas usarão url-loader, enquanto outras usarão file-loader, 
+    tratam-se de experessões regulares um tanto elabordas, mas já são bastante utilizadas. 
+
+
+    Porém, durante o processo de build, o Webpack conseguirá separá-los, deixando os arquivos 
+    JavaScript dentro do bundle.js. Desta forma, resolveremos com o FOUC. Após adicionarmos <link>,
+    acessaremos o Terminal para instalar o extract-text-webpack-plugin: 
+
+    	client$ npm install extract-text-webpack-plugin@3.0.0 --save-dev
+
+    -- important
+    FOUC significa flash of unstyled content. É quando há um hiato entre o carregamento do CSS e sua aplicação na página, 
+    permitindo que o usuário veja a página sem estar estilizada durante um breve tempo.
+
+    	client$ npm install optimize-css-assets-webpack-plugin@2.0.0 --save-dev
+		client$ npm install cssnano@3.10.0 --save-dev
