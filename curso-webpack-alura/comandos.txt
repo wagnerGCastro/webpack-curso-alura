@@ -1,9 +1,13 @@
 
 
 #01 - Webpack, o agrupador de módulos
+=======================================================================================
 
 	1- client caelum$ npm run watch
 	2- server caelum$ npm start
+
+	para build
+	3 - npm run build-dev
 
 	-- client caelum$
 	- remover: npm uninstall babel-cli  
@@ -34,4 +38,35 @@
 	O conceito de entry e output
 	O papel de um loader
 	Instalação e configuração de um loader
+
+
+
+#02 - Preparando o build de produção
+=======================================================================================
+
+	Neste capítulo vimos:
+
+	    O efeito do parâmetro -p para o build de produção.
+	    A incompatibilidade do uglify com código que não sejam escritos em ECMASCRIPT 5.
+	    babili como plugin que ajuda no processo de minificação.
+	    pegadinhas na atribuição de variáveis de ambiente.
+	    o módulos cross-env para garantir compatibilidade do nosso npm script entre diferentes sistemas operacionais.
+
+
+
+	-- package.json ,  -p para mimificar pelo unglify
+		"build-prod": "webpack -p --config webpack.config.js"
+
+    Mimifica ECMASCRIPT 5. O Uglify, minificador embutido no webpack só teria problema caso o código 
+    fosse escrito em ESCMASCRIPT 2015 (ES6) ou superior.
+
+	-- instalar babili para compilar o ESC2015
+	client caelum$ npm install babili-webpack-plugin@0.1.1 --save-dev
+
+	-- Para garantirmos que a mudança da variável de ambiente funcionará em qualquer plataforma, pediremos a ajuda de 
+	   um módulo do NodeJS. No Terminal, acessaremos a pasta projeto webpack client, depois usaremos o comando npm install para o cross-env: 
+
+		-- install:
+		client caelum$ npm install cross-env@5.0.1 --save-dev
+
 
