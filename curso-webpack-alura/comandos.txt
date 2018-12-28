@@ -1,0 +1,37 @@
+
+
+#01 - Webpack, o agrupador de módulos
+
+	1- client caelum$ npm run watch
+	2- server caelum$ npm start
+
+	-- client caelum$
+	- remover: npm uninstall babel-cli  
+	- remover: npm uninstall babel-cli --save-dev
+	- remover: npm uninstall systemjs --save
+
+
+	-- client caelum$
+		No Terminal, digitamos o --save-dev, por se tratar de uma dependêcia de desenvolvimento. 
+		Usaríamos apenas --save por ser uma dependência em tempo de produção. 
+    -- instalar 
+    	npm install webpack@3.1.0 babel-core@6.25.0 --save-dev
+
+    	Aponte de ligação entre o Webpack e o babel-core é o babel-loader (https://github.com/babel/babel-loader), 
+		um carregador exclusivo voltado para o Babel. Esse loader lerá nossas configurações em client/.babelrc quando for executado.
+    	
+    	npm install babel-loader@7.1.0 --save-dev
+
+    -- remover
+    	npm uninstall babel-plugin-transform-es2015-modules-systemjs --save-dev
+
+	Aprendemos neste capítulo:
+
+	O papel do webpack
+	Instalação através do npm
+	Configuração do webpack.config.js
+	Como executar webpack através de um npm script
+	O conceito de entry e output
+	O papel de um loader
+	Instalação e configuração de um loader
+
