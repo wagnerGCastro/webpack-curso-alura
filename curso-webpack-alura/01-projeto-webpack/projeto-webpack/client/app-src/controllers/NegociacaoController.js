@@ -41,6 +41,8 @@ export class NegociacaoController {
     @debounce()
     async adiciona(event) {
 
+       // alert('adicionar');
+
         try {
             const negociacao = this._criaNegociacao();
             const dao = await getNegociacaoDao();

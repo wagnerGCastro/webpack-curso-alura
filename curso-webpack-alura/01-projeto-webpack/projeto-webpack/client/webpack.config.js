@@ -15,8 +15,9 @@ module.exports = {
 
 	// saída
 	output: 	{
-		filename: 	'bundle.js',
-		path: 		path.resolve(__dirname, 'dist')    // __dirname se refere a caminho absolute ou seja pasta client
+		filename: 		'bundle.js',
+		path: 			path.resolve(__dirname, 'dist'),    // __dirname se refere a caminho absolute ou seja pasta client
+		publicPath: 	'dist'
 	},
 
 	module: {

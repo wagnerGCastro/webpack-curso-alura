@@ -70,3 +70,25 @@
 		client caelum$ npm install cross-env@5.0.1 --save-dev
 
 
+
+#03 - Webpack Dev Server e configuração 
+=======================================================================================
+	
+	Neste capítulo vimos:
+
+	    O papel do Webpack Dev Server e suas vantagens como live reloading
+	    Como instalar o Webpack Dev Server através do npm
+	    A criação de um script para executar o servidor
+	    A importância da propriedade publicPath. 
+
+
+	Para trabalharmos em ambiente de desenvolvimento, quero usar um servidor que se integre com o Webpack, 
+	desta forma, não precisaremos criar um servidor próprio para tornar acessível nosso projeto. 
+
+	-- Instalação e configuração
+		client caelum$ npm install webpack-dev-server@2.5.1 --save-dev
+
+		-- package.json
+		-- "start": "webpack-dev-server"
+		npm start
+
