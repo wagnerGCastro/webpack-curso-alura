@@ -177,3 +177,22 @@
 
     	client$ npm install optimize-css-assets-webpack-plugin@2.0.0 --save-dev
 		client$ npm install cssnano@3.10.0 --save-dev
+
+
+
+#05 - Importando scripts 
+=======================================================================================
+
+	Neste capítulo vimos:
+	    Que o Webpack importa scripts através da instrução import sem muito mistério.
+	    A necessidade de utilizar o webpack.ProvidePlugin.
+
+	-- install Jquery
+		client$	npm install jquery@3.2.1 --save
+
+
+#06 - 	Boas práticas  
+=======================================================================================
+
+	* 05 - Gerando a página principal automaticamente
+	client$ npm install html-webpack-plugin@2.29.0 --save-dev
