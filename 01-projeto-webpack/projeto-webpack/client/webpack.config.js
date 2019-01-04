@@ -44,8 +44,11 @@ plugins.push(
 );
 
 // ambiente de production
-if (process.env.NODE_ENV == 'production')
+let SERVICE_URL = 	JSON.stringify('http://localhost:3000');
+if ( process.env.NODE_ENV == 'production' )
 {
+	SERVICE_URL = JSON.stringify('http://localhost:8081');
+
 	plugins.push( new webpack.optimize.ModuleConcatenationPlugin() );
 	plugins.push( new babiliPlugin() );
 
@@ -63,6 +66,14 @@ if (process.env.NODE_ENV == 'production')
 	);
 }
 
+plugins.push(
+	new webpack.DefinePlugin(
+		{
+			SERVICE_URL: SERVICE_URL
+		}
+	)
+);
+
 
 module.exports = {
 	// entrada 1º moódulo que será carregado da aplicação
@@ -73,15 +84,15 @@ module.exports = {
 	// saída
 	output: 	{
 		filename: 		'bundle.js',
-		path: 			path.resolve(__dirname, 'dist'),    // __dirname se refere a caminho absolute ou seja pasta client
-		publicPath: 	'dist'
+		path: 			path.resolve(__dirname, 'dist')    // __dirname se refere a caminho absolute ou seja pasta client
+		
 	},
 
 	module: {
         rules: [
             {
-                test: /\.js$/,				// todos arquivos comm .js
-                exclude: /node_modules/,    // exclkude não irá acessar esta pasta
+                test: /\.js$/,				// todos arquivos com .js
+                exclude: /node_modules/,    // exclude não irá acessar esta pasta
                 use: {
                     loader: 'babel-loader'
                 },

@@ -191,8 +191,31 @@
 		client$	npm install jquery@3.2.1 --save
 
 
-#06 - 	Boas práticas  
+#06 - Boas práticas  
 =======================================================================================
 
 	* 05 - Gerando a página principal automaticamente
 	client$ npm install html-webpack-plugin@2.29.0 --save-dev
+
+
+	* 07 System.import vs import
+	client$  npm install babel-plugin-syntax-dynamic-import@6.18.0 --save-dev
+
+	.babelrc:
+	{
+	    "presets":["es2017"],
+	    "plugins" : ["transform-decorators-legacy", "babel-plugin-syntax-dynamic-import"]
+	}
+
+	Exemplo: //const { NegociacaoService } = await System.import('../domain/negociacao/NegociacaoService');
+             const { NegociacaoService } = await import('../domain/negociacao/NegociacaoService');
+
+
+    Neste capítulo vimos:
+		Otimização com scope hoisting
+		Separação do nosso código das bibliotecas com o CommonsChunkPlugin
+		Geração de index.html automaticamente com todos os artefatos produzidos pelo Webpack já importados.
+		Code splitting e Lazy loading.
+		Sobre utilizar System.import() ou import no carregamento de módulos.
+		Onde ficam os arquivos para distribuição do projeto
+		Como alterar o endereço da API no build de produção com o DefinePlugin.
